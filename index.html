@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory game</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        .heading{
+            text-align: center;
+        }
+        .container{
+
+        }
+        .cards{
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 1%;
+            width: 50vw;
+            margin: auto;
+
+
+        }
+        .card{
+            background-color: burlywood;
+            border: 3px solid rgb(179, 129, 64);
+            border-radius: 5px;
+            width: 8vw;
+            height: 15vh;
+            margin: auto;
+            background-color: wheat;
+            margin: 5%;
+            padding: 5%;
+        }
+        .card img{
+            width: 8.5vw;
+            height: 14vh;
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="heading">Memory game using JS</h2>
+        <div class="cards">
+            <div class="card" tp="a"><img src="img/cat.png" alt=""></div>
+            <div class="card" tp="b"><img src="img/dog.png" alt=""></div>
+            <div class="card" tp="c"><img src="img/duck.png" alt=""></div>
+            <div class="card" tp="d"><img src="img/jaguar.png" alt=""></div>
+            <div class="card" tp="e"><img src="img/lion.png" alt=""></div>
+            <div class="card" tp="f"><img src="img/panther.png" alt=""></div>
+            <div class="card" tp="g"><img src="img/snake.png" alt=""></div>
+            <div class="card" tp="h"><img src="img/tiger.png" alt=""></div>
+            <div class="card" tp="a"><img src="img/cat.png" alt=""></div>
+            <div class="card" tp="b"><img src="img/dog.png" alt=""></div>
+            <div class="card" tp="c"><img src="img/duck.png" alt=""></div>
+            <div class="card" tp="d"><img src="img/jaguar.png" alt=""></div>
+            <div class="card" tp="e"><img src="img/lion.png" alt=""></div>
+            <div class="card" tp="f"><img src="img/panther.png" alt=""></div>
+            <div class="card" tp="g"><img src="img/snake.png" alt=""></div>
+            <div class="card" tp="h"><img src="img/tiger.png" alt=""></div>
+        </div>
+    </div>
+</body>
+</html>
