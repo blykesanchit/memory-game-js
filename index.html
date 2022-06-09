@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Memory game</title>
     <style>
-        body{
+        body {
             margin: 0;
             padding: 0;
         }
-        .heading{
+
+        .heading {
             text-align: center;
         }
-        .container{
 
-        }
-        .cards{
+        .container {}
+
+        .cards {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             grid-gap: 1%;
@@ -25,7 +27,8 @@
 
 
         }
-        .card{
+
+        .card {
             background-color: burlywood;
             border: 3px solid rgb(179, 129, 64);
             border-radius: 5px;
@@ -35,35 +38,160 @@
             background-color: wheat;
             margin: 5%;
             padding: 5%;
+            cursor: pointer;
+            transition: 0.3s all ease;
+            /* transform: (scale(1.0)); */
         }
-        .card img{
+
+        .card:hover {
+            transform: scale(1.05);
+            /* transition: 0.3s all ease; */
+            /* background-color: aquamarine; */
+        }
+
+        .card img {
             width: 8.5vw;
             height: 14vh;
             opacity: 0;
         }
+
+        .clicked {
+            background-color: rgba(255, 166, 0, 0.605);
+        }
+
+        .checked {
+            background-color: greenyellow;
+        }
+
+        .checked>img {
+            opacity: 1;
+        }
+
+        /* THIS SHAKE KEYFRAME HAS BEEN COPIED FROM THE INTERNET */
+        .shake {
+            animation: shake 0.82s cubic-bezier(.36, .07, .19, .97) both;
+            transform: translate3d(0, 0, 0);
+            backface-visibility: hidden;
+            perspective: 1000px;
+        }
+
+        @keyframes shake {
+
+            10%,
+            90% {
+                transform: translate3d(-1px, 0, 0);
+            }
+
+            20%,
+            80% {
+                transform: translate3d(2px, 0, 0);
+            }
+
+            30%,
+            50%,
+            70% {
+                transform: translate3d(-4px, 0, 0);
+            }
+
+            40%,
+            60% {
+                transform: translate3d(4px, 0, 0);
+            }
+        }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h2 class="heading">Memory game using JS</h2>
+        <div>
+            Turns : 0
+            <span id="turnsBox"></span>
+        </div>
+        <div>
+            Matches : 0 
+            <span id="matchesBox"></span>
+        </div>
         <div class="cards">
-            <div class="card" tp="a"><img src="img/cat.png" alt=""></div>
-            <div class="card" tp="b"><img src="img/dog.png" alt=""></div>
-            <div class="card" tp="c"><img src="img/duck.png" alt=""></div>
-            <div class="card" tp="d"><img src="img/jaguar.png" alt=""></div>
-            <div class="card" tp="e"><img src="img/lion.png" alt=""></div>
-            <div class="card" tp="f"><img src="img/panther.png" alt=""></div>
-            <div class="card" tp="g"><img src="img/snake.png" alt=""></div>
-            <div class="card" tp="h"><img src="img/tiger.png" alt=""></div>
-            <div class="card" tp="a"><img src="img/cat.png" alt=""></div>
-            <div class="card" tp="b"><img src="img/dog.png" alt=""></div>
-            <div class="card" tp="c"><img src="img/duck.png" alt=""></div>
-            <div class="card" tp="d"><img src="img/jaguar.png" alt=""></div>
-            <div class="card" tp="e"><img src="img/lion.png" alt=""></div>
-            <div class="card" tp="f"><img src="img/panther.png" alt=""></div>
-            <div class="card" tp="g"><img src="img/snake.png" alt=""></div>
-            <div class="card" tp="h"><img src="img/tiger.png" alt=""></div>
+            <div class="card" tp="a"><img src="img/a.png" alt=""></div>
+            <div class="card" tp="b"><img src="img/b.png" alt=""></div>
+            <div class="card" tp="c"><img src="img/c.png" alt=""></div>
+            <div class="card" tp="d"><img src="img/d.png" alt=""></div>
+            <div class="card" tp="e"><img src="img/e.png" alt=""></div>
+            <div class="card" tp="f"><img src="img/f.png" alt=""></div>
+            <div class="card" tp="g"><img src="img/g.png" alt=""></div>
+            <div class="card" tp="h"><img src="img/h.png" alt=""></div>
+            <div class="card" tp="a"><img src="img/a.png" alt=""></div>
+            <div class="card" tp="b"><img src="img/b.png" alt=""></div>
+            <div class="card" tp="c"><img src="img/c.png" alt=""></div>
+            <div class="card" tp="d"><img src="img/d.png" alt=""></div>
+            <div class="card" tp="e"><img src="img/e.png" alt=""></div>
+            <div class="card" tp="f"><img src="img/f.png" alt=""></div>
+            <div class="card" tp="g"><img src="img/g.png" alt=""></div>
+            <div class="card" tp="h"><img src="img/h.png" alt=""></div>
         </div>
     </div>
+    f
+    <script>
+        let matches=0;
+        let turns=0;
+        let counter = 0;
+        let firstSelection = "";
+        let secondSelection = "";
+        let turnsBox=document.getElementById("turnsBox");
+        let matchesBox=document.getElementById("matchesBox");
+
+
+        let cards = document.querySelectorAll(".cards .card");
+        cards.forEach(card => {
+            card.addEventListener("click", function cardClickHandler(e) {
+                let sel = card.getAttribute("tp");
+                card.classList.add("clicked");
+                if (counter == 0) {
+                    firstSelection = sel;
+                    counter++;
+                }
+                else if (counter == 1) {
+                    turnsBox.innerText=Number(turnsBox.innerText)+1;
+                    turns++;
+                    secondSelection = sel;
+                    if (firstSelection == secondSelection) {
+                        matchesBox.innerText=Number(matchesBox.innerText)+1;
+                        matches++;
+                        let correctCards = document.querySelectorAll(".clicked");
+                        // console.log("hola");
+                        // console.log(correctCards);
+                        correctCards.forEach(correctCard => {
+                            // console.log(correctCard);
+                            correctCard.classList.add("checked");
+                            correctCard.classList.remove("clicked");
+
+                        });
+                        // card.classList.add("checked");
+                    }
+                    else {
+                        let incorrectCards = document.querySelectorAll(".clicked");
+                        incorrectCards.forEach(incorrectCard => {
+                            incorrectCard.classList.add("shake");
+                            setTimeout(() => {
+                                incorrectCard.classList.remove("clicked");
+                            }, 800);
+                        });
+                    }
+                    counter = 0;
+                }
+
+
+                // console.log(sel);
+                // console.log(typeof e.target);
+                // console.log(e.target);
+                // console.log(e);
+            });
+        });
+
+        console.log(cards);
+
+    </script>
 </body>
+
 </html>
